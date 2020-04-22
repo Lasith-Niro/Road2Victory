@@ -14,10 +14,12 @@ public class PlayerEngine : MonoBehaviour
     public float animationDuration = 3.0f;
 
     private bool isDead = false;
+    private float startTime;
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class PlayerEngine : MonoBehaviour
         {
             return;
         }
-        if(Time.time < animationDuration)
+        if(Time.time - startTime < animationDuration)
         {
             // blocking key board inputs until the start animation finishes
             controller.Move(Vector3.forward * speed * Time.deltaTime);

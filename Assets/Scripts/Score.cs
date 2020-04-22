@@ -13,6 +13,8 @@ public class Score : MonoBehaviour
     private int scoreThreshold = 10;
 
     private bool isDead = false;
+    public FailMenu failMenu;
+
     // Update is called once per frame
     void Update()
     {
@@ -40,5 +42,8 @@ public class Score : MonoBehaviour
     public void onDeath()
     {
         isDead = true;
+        if(PlayerPrefs.GetFloat("HighScore") < score )
+            PlayerPrefs.SetFloat("HighScore", score);
+        failMenu.ToggleMenu(score);
     }
 }
