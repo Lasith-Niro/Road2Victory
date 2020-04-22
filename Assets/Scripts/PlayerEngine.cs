@@ -48,4 +48,9 @@ public class PlayerEngine : MonoBehaviour
 
         controller.Move(moveVector * Time.deltaTime);
     }
+
+    public void SetSpeed(float value)
+    {
+        speed += value;
+    }
 }
