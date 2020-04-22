@@ -11,15 +11,18 @@ public class Score : MonoBehaviour
     private int level = 1;
     private int maxLevel = 10;
     private int scoreThreshold = 10;
-    
+
+    private bool isDead = false;
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+            return;
         if(score>= scoreThreshold)
         {
             NextLevel();
         }
-        score += Time.deltaTime;
+        score += Time.deltaTime * level;
         scoreTxt.text = ((int)score).ToString();
     }
 
@@ -32,5 +35,10 @@ public class Score : MonoBehaviour
         scoreThreshold *= 2;
         level++;
         GetComponent<PlayerEngine>().SetSpeed(level);
+    }
+
+    public void onDeath()
+    {
+        isDead = true;
     }
 }

@@ -13,6 +13,7 @@ public class PlayerEngine : MonoBehaviour
 
     public float animationDuration = 3.0f;
 
+    private bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,10 @@ public class PlayerEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            return;
+        }
         if(Time.time < animationDuration)
         {
             // blocking key board inputs until the start animation finishes
@@ -52,5 +57,21 @@ public class PlayerEngine : MonoBehaviour
     public void SetSpeed(float value)
     {
         speed += value;
+    }
+    
+    // if arthur collide this callback will fires up
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.point.z > transform.position.z + controller.radius)
+        {
+            Death();
+        }
+    }
+
+    private void Death()
+    {
+        isDead = true;
+        GetComponent<Score>().onDeath();
+        //Debug.Log("dead");
     }
 }
