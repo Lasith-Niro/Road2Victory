@@ -15,13 +15,5 @@ public class CoinTrigger : MonoBehaviour
     {
         transform.Rotate(0, 90 * Time.deltaTime, 0);
     }
-    /*
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
-    }
-    */
+    
 }

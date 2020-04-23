@@ -64,7 +64,13 @@ public class PlayerEngine : MonoBehaviour
     // if arthur collide this callback will fires up
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.point.z > transform.position.z + controller.radius)
+        if(hit.gameObject.tag == "Coin")
+        {
+            //play sound + add to coin score
+            Destroy(hit.gameObject);
+        }
+
+        if (hit.point.z > transform.position.z + controller.radius && !( hit.gameObject.tag== "Coin"))
         {
             Death();
         }
