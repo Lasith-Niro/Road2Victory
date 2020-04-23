@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerEngine : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerEngine : MonoBehaviour
 
     private bool isDead = false;
     private float startTime;
+
+    public Text coinScore;
+    private int totalCoins;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +58,8 @@ public class PlayerEngine : MonoBehaviour
         moveVector.z = speed; //Always go forword
 
         controller.Move(moveVector * Time.deltaTime);
+
+        coinScore.text = ((int)totalCoins).ToString();
     }
 
     public void SetSpeed(float value)
@@ -67,6 +73,7 @@ public class PlayerEngine : MonoBehaviour
         if(hit.gameObject.tag == "Coin")
         {
             //play sound + add to coin score
+            totalCoins++;
             Destroy(hit.gameObject);
         }
 

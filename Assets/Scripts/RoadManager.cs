@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoadManager : MonoBehaviour
 {
+    [Header("Road Settings")]
     public GameObject[] roadPrefabs;
 
     private Transform playerTransform;
@@ -39,7 +40,6 @@ public class RoadManager : MonoBehaviour
             DeleteRoad();
         }
     }
-
     private void SpawnRoad(int prefabIndex=-1)
     {
         GameObject road;
