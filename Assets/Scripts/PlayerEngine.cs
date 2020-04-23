@@ -19,16 +19,26 @@ public class PlayerEngine : MonoBehaviour
 
     public Text coinScore;
     private int totalCoins;
+
+    public float jumpSpeed = 10.0f;
+    private Rigidbody rb;
+    private bool onGround = true;
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown("space") && onGround)
+        {
+            rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            onGround = false;
+        }
         if (isDead)
         {
             return;
@@ -80,6 +90,14 @@ public class PlayerEngine : MonoBehaviour
         if (hit.point.z > transform.position.z + controller.radius && !( hit.gameObject.tag== "Coin"))
         {
             Death();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Tile")
+        {
+            onGround = true;
         }
     }
 
