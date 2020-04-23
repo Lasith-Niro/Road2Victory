@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void showDetails()
     {
-
+        SceneManager.LoadScene("About");
     }
 
     public void QuitGame()
