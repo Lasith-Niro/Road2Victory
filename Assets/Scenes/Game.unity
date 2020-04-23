@@ -829,6 +829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1141944700}
   - component: {fileID: 1141944701}
+  - component: {fileID: 1141944702}
   m_Layer: 0
   m_Name: RoadManager
   m_TagString: Untagged
@@ -869,6 +870,19 @@ MonoBehaviour:
   - {fileID: 4419225386057674023, guid: a3ff8380a08087d40a12aecee499f1bc, type: 3}
   - {fileID: 8375561752432177420, guid: 9491a833b856a49468048d0714e9ea79, type: 3}
   - {fileID: 2795183359570776632, guid: 4b1081e0ff21b6d4585631d2d9cd61e2, type: 3}
+--- !u!114 &1141944702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141944699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e704f52b9b69c4287b033d80e00e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 100000, guid: 875a37b74a1fd3844b88bed0b24ae14c, type: 3}
 --- !u!1 &1389515018
 GameObject:
   m_ObjectHideFlags: 0
