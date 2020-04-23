@@ -21,24 +21,25 @@ public class PlayerEngine : MonoBehaviour
     private int totalCoins;
 
     public float jumpSpeed = 10.0f;
-    private Rigidbody rb;
     private bool onGround = true;
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         startTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown("space") && onGround)
         {
             rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
             onGround = false;
         }
+        */
         if (isDead)
         {
             return;
@@ -84,6 +85,7 @@ public class PlayerEngine : MonoBehaviour
         {
             //play sound + add to coin score
             totalCoins++;
+            FindObjectOfType<AudioManager>().Play("coin");
             Destroy(hit.gameObject);
         }
 
@@ -103,6 +105,8 @@ public class PlayerEngine : MonoBehaviour
 
     private void Death()
     {
+        FindObjectOfType<AudioManager>().Stop("background");
+        FindObjectOfType<AudioManager>().Play("end");
         isDead = true;
         GetComponent<Score>().onDeath();
         //Debug.Log("dead");

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Score Variables")]
     public Text highScoreTxt;
 
     private void Start()

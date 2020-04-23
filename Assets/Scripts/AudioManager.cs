@@ -1,91 +1,53 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
+using UnityEngine.UI;
+using InfiniteRunner.Game;
+using System;
 
-
-public enum SoundEffects { ObstacleCollisionSoundEffect, CoinSoundEffect, PowerUpSoundEffect, GameOverSoundEffect, GUITapSoundEffect }
 public class AudioManager : MonoBehaviour
 {
-    static public AudioManager instance;
+    public Sound[] sounds;
+    public static AudioManager instance;
 
-    public AudioClip backgroundMusic;
-    public AudioClip obstacleCollision;
-    public AudioClip coinCollection;
-    public AudioClip powerUpCollection;
-    public AudioClip gameOver;
-    public AudioClip guiTap;
-
-    public float backgroundMusicVolume;
-    public float soundEffectsVolume;
-
-    private AudioSource backgroundAudio;
-    // use multiple sound effects audo sources so more than one sound effect can be played at the same time
-    private AudioSource[] soundEffectsAudio;
-    private int nextSoundEffectsAudioIndex = 0;
-
-    public void Awake()
+    private void Awake()
     {
-        instance = this;
-    }
-
-    public void Start()
-    {
-        AudioSource[] sources = Camera.main.GetComponents<AudioSource>();
-        backgroundAudio = sources[0];
-        soundEffectsAudio = new AudioSource[2];
-        soundEffectsAudio[0] = sources[1];
-        soundEffectsAudio[1] = sources[2];
-
-        backgroundAudio.clip = backgroundMusic;
-        backgroundAudio.loop = true;
-        backgroundAudio.volume = Mathf.Clamp01(backgroundMusicVolume);
-
-        soundEffectsAudio[0].volume = Mathf.Clamp01(soundEffectsVolume);
-        soundEffectsAudio[1].volume = Mathf.Clamp01(soundEffectsVolume);
-    }
-
-    public void PlayBackgroundMusic(bool play)
-    {
-        if (play)
-        {
-            backgroundAudio.Play();
-        }
+        if (instance == null)
+            instance = this;
         else
         {
-            backgroundAudio.Pause();
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+        foreach(Sound x in sounds)
+        {
+            x.source = gameObject.AddComponent<AudioSource>();
+            x.source.clip = x.clip;
+            x.source.volume = x.volume;
+            x.source.pitch = x.pitch;
+            x.source.loop = x.loop;
         }
     }
 
-    public void PlaySoundEffect(SoundEffects soundEffect)
+    private void Start()
     {
-        AudioClip clip = null;
-        float pitch = 1;
-        switch (soundEffect)
-        {
-            case SoundEffects.ObstacleCollisionSoundEffect:
-                clip = obstacleCollision;
-                break;
+        Play("background");
+    }
 
-            case SoundEffects.CoinSoundEffect:
-                clip = coinCollection;
-                pitch = 1.5f;
-                break;
+    public void Play(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+        s.source.Play();
+    }
 
-            case SoundEffects.PowerUpSoundEffect:
-                clip = powerUpCollection;
-                break;
-
-            case SoundEffects.GameOverSoundEffect:
-                clip = gameOver;
-                break;
-
-            case SoundEffects.GUITapSoundEffect:
-                clip = guiTap;
-                break;
-        }
-
-        soundEffectsAudio[nextSoundEffectsAudioIndex].pitch = pitch;
-        soundEffectsAudio[nextSoundEffectsAudioIndex].clip = clip;
-        soundEffectsAudio[nextSoundEffectsAudioIndex].Play();
-        nextSoundEffectsAudioIndex = (nextSoundEffectsAudioIndex + 1) % soundEffectsAudio.Length;
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+            return;
+        s.source.Stop();
     }
 }

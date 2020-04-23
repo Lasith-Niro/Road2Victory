@@ -7,6 +7,11 @@ public class AnimateCredits : MonoBehaviour
 {
     public GameObject credits;
 
+    private void Awake()
+    {
+        FindObjectOfType<AudioManager>().Stop("background");
+        FindObjectOfType<AudioManager>().Play("about");
+    }
     // Start is called before the first frame update
     void Start()
     {
