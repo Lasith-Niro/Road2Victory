@@ -8,6 +8,7 @@ public class FailMenu : MonoBehaviour
 {
     public Image backgroundImage;
     public Text scoreTxt;
+    //public TextMesh scoreTxt;
 
     private bool isShowned = false;
     private float transition = 0f;
