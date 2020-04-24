@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: background
-    clip: {fileID: 8300000, guid: 3aeff9b8867d0a74a9bbbd4120196bae, type: 3}
-    volume: 0.03
+    clip: {fileID: 8300000, guid: 23480a08f8f0f0a438491a25ce9f9dc2, type: 3}
+    volume: 0.05
     pitch: 1
     source: {fileID: 0}
     loop: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
     loop: 0
   - name: coin
     clip: {fileID: 8300000, guid: 68aab4b35fc4e4446b00d666dbca4a94, type: 3}
-    volume: 0.1
+    volume: 0.09
     pitch: 0.48
     source: {fileID: 0}
     loop: 0

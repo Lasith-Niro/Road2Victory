@@ -9,12 +9,13 @@ public class AnimateCredits : MonoBehaviour
 
     private void Awake()
     {
-        FindObjectOfType<AudioManager>().Stop("background");
-        FindObjectOfType<AudioManager>().Play("about");
+        
     }
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<AudioManager>().Stop("background");
+        FindObjectOfType<AudioManager>().Play("about");
         StartCoroutine(RunCredits());
     }
     IEnumerator RunCredits()
@@ -23,5 +24,7 @@ public class AnimateCredits : MonoBehaviour
         credits.SetActive(true);
         yield return new WaitForSeconds(15);
         SceneManager.LoadScene("Menu2");
+        FindObjectOfType<AudioManager>().Play("background");
+        FindObjectOfType<AudioManager>().Stop("about");
     }
 }

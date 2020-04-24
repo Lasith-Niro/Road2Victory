@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("background");
         highScoreTxt.text = "Highscore : " + ((int)PlayerPrefs.GetFloat("HighScore")).ToString();
     }
     public void PlayGame()
