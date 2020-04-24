@@ -14,12 +14,11 @@ public class AnimateCredits : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindObjectOfType<AudioManager>().Stop("background");
-        FindObjectOfType<AudioManager>().Play("about");
         StartCoroutine(RunCredits());
     }
     IEnumerator RunCredits()
     {
+
         yield return new WaitForSeconds(0.5f);
         credits.SetActive(true);
         yield return new WaitForSeconds(15);

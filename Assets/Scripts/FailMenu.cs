@@ -38,11 +38,13 @@ public class FailMenu : MonoBehaviour
 
     public void Restart()
     {
+        FindObjectOfType<AudioManager>().Play("background");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Back()
     {
+        FindObjectOfType<AudioManager>().Stop("background");
         SceneManager.LoadScene("Menu2");
     }
 }
